@@ -42,6 +42,8 @@ public class WiseSayingController {
 
         for(WiseSaying wiseSaying : wiseSayings.reversed()) {
             System.out.printf("%d / %s / %s\n",wiseSaying.getId(),wiseSaying.getAuthor(),wiseSaying.getContent());
+
+
         }
 
     }
