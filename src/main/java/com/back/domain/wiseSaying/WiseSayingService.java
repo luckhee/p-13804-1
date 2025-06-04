@@ -1,24 +1,20 @@
 package com.back.domain.wiseSaying;
 
 import com.back.domain.wiseSaying.entity.WiseSaying;
+import com.back.domain.wiseSaying.repository.WiseSayingRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WiseSayingService {
-    private int lastid =0;
-    private List<WiseSaying> wiseSayings = new ArrayList<>();
+
+    private WiseSayingRepository wiseSayingRepository = new WiseSayingRepository();
 
     public WiseSaying write(String content ,String author) {
-        int id = ++lastid;
-        WiseSaying wiseSaying = new WiseSaying(id,author,content);
-
-        wiseSayings.add(wiseSaying);
-
+        WiseSaying wiseSaying = wiseSayingRepository.save(content, author);
         return wiseSaying;
     }
 
     public List<WiseSaying> findForList() {
-        return wiseSayings.reversed();
+        return wiseSayingRepository.findList();
     }
 }

@@ -1,6 +1,7 @@
 package com.back.domain.wiseSaying.controller;
 
 import com.back.AppTestRunner;
+import com.back.domain.global.Rq;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -69,5 +70,14 @@ public class WiseSayingControllerTest {
                 .contains("----------------------")
                 .contains("2 / 작자미상 / 과거에 집착하지 마라.")
                 .contains("1 / 작자미상 / 현재를 사랑하라.");
+    }
+
+    @Test
+    @DisplayName("Rq테스트")
+    void t5() {
+        Rq rq = new Rq("삭제?id=1");
+        int id = rq.getParamAsInt("id", -1);
+
+        assertThat(id).isEqualTo(1);
     }
 }
