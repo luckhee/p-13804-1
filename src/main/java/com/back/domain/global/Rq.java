@@ -8,22 +8,26 @@ public class Rq {
     // 삭제?id=1
     Map<String, Integer> idMap = new HashMap<>();
     public Rq(String keyWord) {
-
-        String[] splitCmd = keyWord.split("\\?");
-        this.cmd = splitCmd[0];
-
-        String splitCmdBit = splitCmd[1];
-        String[] splitCmdBits = splitCmdBit.split("=");
-        idMap.put(splitCmdBits[0],Integer.parseInt(splitCmdBits[1]));
+        cmd = keyWord;
     }
 
     public int getParamAsInt(String keyWord, int defaultReturn) {
         int key;
-        try {
+
+        if(keyWord.contains("\\?")) {
+            String[] splitCmd = keyWord.split("\\?");
+            this.cmd = splitCmd[0];
+
+            String splitCmdBit = splitCmd[1];
+            String[] splitCmdBits = splitCmdBit.split("=");
+            idMap.put(splitCmdBits[0],Integer.parseInt(splitCmdBits[1]));
+
             key = idMap.getOrDefault(keyWord,defaultReturn);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } else {
+            return defaultReturn;
         }
+
+
         return key;
     }
 }
