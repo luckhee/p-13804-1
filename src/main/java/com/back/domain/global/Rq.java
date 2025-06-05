@@ -9,7 +9,7 @@ public class Rq {
     Map<String, Integer> idMap = new HashMap<>();
     Map<String, String> kewordMap = new HashMap<>();
     String[] splitCmdBits=null;
-    public Rq(String keyWord) { // 목록?searchKeyword=영광
+    public Rq(String keyWord) { // 삭제?id=1
         cmd = keyWord;
 
         if(cmd.contains("?")) {
@@ -46,8 +46,11 @@ public class Rq {
 
     public String getParam(String searchKeyword, String defaultReturn) {
 
-        kewordMap.put(splitCmdBits[0],splitCmdBits[1]);
 
+
+        if(splitCmdBits!=null &&splitCmdBits.length >= 2) {
+            kewordMap.put(splitCmdBits[0],splitCmdBits[1]);
+        }
 
 
         return kewordMap.getOrDefault(searchKeyword,defaultReturn);

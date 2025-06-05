@@ -26,18 +26,15 @@ public class App {
             System.out.print("명령) ");
             String cmd = scanner.nextLine();
 
-            switch (cmd) {
-                case "등록" -> {
-                    wiseSayingController.actionWirte();
-
-                }
-                case "목록" -> {
-                    wiseSayingController.actionList();
-                }
-                case "종료" -> {
-                    systemController.exit();
-                    return;
-                }
+            if (cmd.equals("등록")) {
+                wiseSayingController.actionWirte();
+            } else if (cmd.equals("목록")) {
+                wiseSayingController.actionList();
+            } else if (cmd.startsWith("삭제?id=")) {
+                wiseSayingController.actionDelete(cmd);
+            } else if (cmd.equals("종료")) {
+                systemController.exit();
+                return;
             }
         }
 

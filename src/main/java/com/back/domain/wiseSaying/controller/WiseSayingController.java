@@ -1,7 +1,7 @@
 package com.back.domain.wiseSaying.controller;
 
-import com.back.domain.wiseSaying.WiseSayingService;
 import com.back.domain.wiseSaying.entity.WiseSaying;
+import com.back.domain.wiseSaying.service.WiseSayingService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -22,10 +22,6 @@ public class WiseSayingController {
         System.out.print("작가 : ");
         String author = scanner.nextLine();
 
-
-
-
-
         WiseSaying wiseSaying = wiseSayingService.write(content,author);
 
         System.out.printf("%d번 명언이 등록되었습니다.",wiseSaying.getId());
@@ -45,6 +41,12 @@ public class WiseSayingController {
 
 
         }
+
+    }
+
+    public void actionDelete(String cmd) {
+        String result = wiseSayingService.delete(cmd);
+        System.out.println(result);
 
     }
 }

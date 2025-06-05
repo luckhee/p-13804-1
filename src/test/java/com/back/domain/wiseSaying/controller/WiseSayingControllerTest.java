@@ -119,4 +119,47 @@ public class WiseSayingControllerTest {
         assertThat(searchKeyword).isEqualTo("영광");
     }
 
+
+    @Test
+    @DisplayName("Rq테스트 - id 파라미터가 없는 경우2")
+    void t10() {
+        Rq rq = new Rq("목록");
+        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+
+        assertThat(searchKeyword).isEqualTo("");
+    }
+
+    Rq rq = new Rq("목록?searchKeyword=");
+    String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+
+    @Test
+    @DisplayName("Rq테스트 - searchKeyword 파라미터 값이 없는 경우")
+    void t11() {
+        Rq rq = new Rq("목록");
+        String searchKeyword = rq.getParam("searchKeyword", ""); // ""
+
+        assertThat(searchKeyword).isEqualTo("");
+    }
+
+    @Test
+    @DisplayName("1번 명언 삭제")
+    void t12() {
+        String rs = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                목록
+                삭제?id=1
+                """);
+
+        assertThat(rs)
+                .contains("번호 / 작가 / 명언")
+                .contains("----------------------")
+                .contains("2 / 작자미상 / 과거에 집착하지 마라.")
+                .contains("1 / 작자미상 / 현재를 사랑하라.")
+                .contains("1번 명언이 삭제되었습니다.");
+    }
 }
