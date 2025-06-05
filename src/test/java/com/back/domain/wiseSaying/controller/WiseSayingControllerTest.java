@@ -108,4 +108,15 @@ public class WiseSayingControllerTest {
         assertThat(id).isEqualTo(-1);
     }
 
+
+
+    @Test
+    @DisplayName("Rq테스트 - id 파라미터가 없는 경우2")
+    void t9() {
+        Rq rq = new Rq("목록?searchKeyword=영광");
+        String searchKeyword = rq.getParam("searchKeyword", ""); // "영광"
+
+        assertThat(searchKeyword).isEqualTo("영광");
+    }
+
 }

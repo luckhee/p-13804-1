@@ -7,6 +7,7 @@ public class Rq {
     String cmd;
 
     Map<String, Integer> idMap = new HashMap<>();
+    Map<String, String> kewordMap = new HashMap<>();
     public Rq(String keyWord) { // 삭제?id=
         cmd = keyWord;
 
@@ -39,5 +40,10 @@ public class Rq {
 
 
         return key;
+    }
+
+
+    public String getParam(String searchKeyword, String defaultReturn) {
+        return "!2";
     }
 }
