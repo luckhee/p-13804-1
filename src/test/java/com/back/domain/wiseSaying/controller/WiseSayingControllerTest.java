@@ -89,4 +89,23 @@ public class WiseSayingControllerTest {
 
         assertThat(id).isEqualTo(-1);
     }
+
+    @Test
+    @DisplayName("Rq테스트 - id 파라미터가 없는 경우2")
+    void t7() {
+        Rq rq = new Rq("삭제?id=");
+        int id = rq.getParamAsInt("id", -1); // -1
+
+        assertThat(id).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("Rq테스트 - id 파라미터가 없는 경우2")
+    void t8() {
+        Rq rq = new Rq("삭제?id=일번");
+        int id = rq.getParamAsInt("id", -1); // -1
+
+        assertThat(id).isEqualTo(-1);
+    }
+
 }
