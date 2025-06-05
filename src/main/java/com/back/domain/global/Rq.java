@@ -8,17 +8,16 @@ public class Rq {
 
     Map<String, Integer> idMap = new HashMap<>();
     Map<String, String> kewordMap = new HashMap<>();
-    public Rq(String keyWord) { // 삭제?id=
+    String[] splitCmdBits=null;
+    public Rq(String keyWord) { // 목록?searchKeyword=영광
         cmd = keyWord;
 
         if(cmd.contains("?")) {
             String[] splitCmd = cmd.split("\\?");
 
             String splitCmdBit = splitCmd[1];
-            String[] splitCmdBits = splitCmdBit.split("=");
-            if(splitCmdBits.length >= 2 && isNumeric(splitCmdBits[1])) {
-                idMap.put(splitCmdBits[0],Integer.parseInt(splitCmdBits[1]));
-            }
+            splitCmdBits = splitCmdBit.split("=");
+
 
         }
     }
@@ -34,16 +33,23 @@ public class Rq {
     }
 
     public int getParamAsInt(String keyWord, int defaultReturn) {
-        int key;
+        int key = -1;
+
+        if(splitCmdBits!=null &&splitCmdBits.length >= 2 && isNumeric(splitCmdBits[1])) {
+            idMap.put(splitCmdBits[0],Integer.parseInt(splitCmdBits[1]));
+        }
         key = idMap.getOrDefault(keyWord,defaultReturn);
-
-
 
         return key;
     }
 
 
     public String getParam(String searchKeyword, String defaultReturn) {
-        return "!2";
+
+        kewordMap.put(splitCmdBits[0],splitCmdBits[1]);
+
+
+
+        return kewordMap.getOrDefault(searchKeyword,defaultReturn);
     }
 }
