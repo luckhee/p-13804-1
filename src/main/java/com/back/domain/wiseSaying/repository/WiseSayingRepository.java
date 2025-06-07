@@ -4,7 +4,6 @@ import com.back.domain.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class WiseSayingRepository {
@@ -23,23 +22,18 @@ public class WiseSayingRepository {
     }
 
     public String delete(int id) {
-        Optional<WiseSaying> target = wiseSayings.stream()
-                .filter(e-> e.getId() == id)
-                .findFirst();
+        boolean exists = wiseSayings.stream()
+                .anyMatch(e -> e.getId() == id);
 
-        if(target.isEmpty()) {
+        if (!exists) {
             return id + "번 명언은 존재하지 않습니다.";
         }
 
+        wiseSayings = wiseSayings.stream()
+                .filter(e -> e.getId() != id)
+                .collect(Collectors.toList());
 
-        try {
-            wiseSayings = wiseSayings.stream()
-                    .filter(e->e.getId() != id)
-                    .collect(Collectors.toList());
-            return id+"번 명언이 삭제되었습니다.";
-        } catch (Exception e) {
-            return id+"번 명언은 존재하지 않습니다.";
-        }
+        return id + "번 명언이 삭제되었습니다.";
 
     }
 }
