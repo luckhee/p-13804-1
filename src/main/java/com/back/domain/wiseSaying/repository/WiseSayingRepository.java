@@ -4,11 +4,11 @@ import com.back.domain.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WiseSayingRepository {
     private int lastid =0;
     private List<WiseSaying> wiseSayings = new ArrayList<>();
+
 
     public WiseSaying save(String content, String author) {
 
@@ -27,13 +27,21 @@ public class WiseSayingRepository {
 
         if (!exists) {
             return id + "번 명언은 존재하지 않습니다.";
+        } else {
+            wiseSayings = wiseSayings.stream()
+                    .filter(e-> e.getId() != id)
+                    .toList();
         }
 
-        wiseSayings = wiseSayings.stream()
-                .filter(e -> e.getId() != id)
-                .collect(Collectors.toList());
+
 
         return id + "번 명언이 삭제되었습니다.";
 
     }
+
+    public List<WiseSaying> modify() {
+        return wiseSayings;
+    }
+
+
 }

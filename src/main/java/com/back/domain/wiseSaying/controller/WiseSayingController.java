@@ -8,12 +8,13 @@ import java.util.Scanner;
 
 public class WiseSayingController {
     private Scanner scanner;
-    private WiseSayingService wiseSayingService = new WiseSayingService();
+    private WiseSayingService wiseSayingService;
 
 
 
     public WiseSayingController(Scanner scanner) {
         this.scanner = scanner;
+        wiseSayingService = new WiseSayingService(scanner);
     }
     public void actionWirte() {
         System.out.print("명언 : ");
@@ -47,6 +48,12 @@ public class WiseSayingController {
     public void actionDelete(String cmd) {
         String result = wiseSayingService.delete(cmd);
         System.out.println(result);
+    }
 
+
+
+    public void actionModify(String cmd) {
+        String result = wiseSayingService.modify(cmd);
+        System.out.println(result);
     }
 }
